@@ -34,7 +34,7 @@ public:
     // saakht DNA az RNA
     void RNAtoDNA()
     {
-        cout << "DNA from RNA : " << endl
+        cout << "DNA from RNA :" << endl
              << RNA << endl;
         for(int i = 0; i < RNA.size(); i++)
         {
