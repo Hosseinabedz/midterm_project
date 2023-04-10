@@ -13,6 +13,7 @@ char Complementary(char nokleotid)
     else if (nokleotid == 'T') { return 'A';}
     else if (nokleotid == 'C') { return 'G';}
     else if (nokleotid == 'G') { return 'C';}
+    return ' ';
 }
 
 class Genome
