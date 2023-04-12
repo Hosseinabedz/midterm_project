@@ -10,12 +10,10 @@ char Complementary(char nokleotid);
 
 class Genome
 {
+    friend class Cell;
 private:
     string RNA;
     string DNA[2];
-    string HDNA[2];
-    vector<string> reshte1;
-    vector<string> reshte2;
 public:
     Genome() {}
     Genome(string _RNA, string _DNA, string _DNA2)
@@ -24,7 +22,11 @@ public:
         this->DNA[0] = _DNA;
         this->DNA[1] = _DNA2;
     }
-
+    Genome(string _DNA, string _DNA2)
+    {
+        this->DNA[0] = _DNA;
+        this->DNA[1] = _DNA2;
+    }
     // saakht DNA az RNA
     void RNAtoDNA();
 
@@ -37,19 +39,17 @@ public:
     // jahesh maakoos
     void reverseMutation(string s1);
 
-    // chromosome storage 
-    void chromosomes_storage(int n);
-
-    vector<string> get_reshte1 ();
-
-    vector<string> get_reshte2 ();
 };
 
 class Cell : public Genome
 {
 private:
-    
+    vector<Genome> chromosomes;
 public:
+
+    // chromosome storage 
+    void chromosomes_storage(vector<Genome> n);
+
     // Cell death
     void cell_death();
 
