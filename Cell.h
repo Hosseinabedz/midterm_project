@@ -55,4 +55,7 @@ public:
 
     // longMutation
     void longMutation(string s1 , int n , string s2 , int m);
+
+    // jahesh makoos
+    void reverseMutation(string s1 , int n);
 };
