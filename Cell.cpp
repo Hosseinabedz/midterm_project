@@ -289,6 +289,11 @@ void Cell::reverseMutation(string s1, int n)
     chromosomes[n].reverseMutation(s1);
 }
 
+void Cell::mutation(char char1, char char2, int n, int m)
+{
+    chromosomes[m].mutation(char1, char2, n);
+}
+
 int main()
 {
 

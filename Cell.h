@@ -58,4 +58,7 @@ public:
 
     // jahesh makoos
     void reverseMutation(string s1 , int n);
+
+    //jahesh koochak
+    void mutation(char char1, char char2, int n, int m);
 };
