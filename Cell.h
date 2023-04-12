@@ -13,9 +13,6 @@ class Genome
 private:
     string RNA;
     string DNA[2];
-    string HDNA[2];
-    vector<string> reshte1;
-    vector<string> reshte2;
 public:
     Genome() {}
     Genome(string _RNA, string _DNA, string _DNA2)
@@ -36,19 +33,13 @@ public:
 
     // jahesh maakoos
     void reverseMutation(string s1);
-
-    // chromosome storage 
-    void chromosomes_storage(int n);
-
-    vector<string> get_reshte1 ();
-
-    vector<string> get_reshte2 ();
 };
 
 class Cell : public Genome
 {
 private:
-    
+    vector<string> reshte1;
+    vector<string> reshte2;
 public:
     // Cell death
     void cell_death();
@@ -56,6 +47,13 @@ public:
     // longMutation
     void longMutation(string s1 , int n , string s2 , int m);
 
+    // jahesh koochak
+    void mutation(char char1, char char2, int n , int m);
+
     // jahesh makoos
     void reverseMutation(string s1 , int n);
+
+    // chromosome storage 
+    void chromosomes_storage(int n);
+
 };

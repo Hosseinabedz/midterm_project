@@ -34,7 +34,6 @@ void Genome::mutation(char char1, char char2, int n)
                 target++;
             }
             if (target == n) { break; }
-
         }
 
         // mutation for DNA
@@ -214,83 +213,61 @@ void Genome::reverseMutation(string s1)
 
 }
 
-vector<string> Genome::get_reshte1()
-{
-    return reshte1;
-}
-
-vector<string> Genome::get_reshte2()
-{
-    return reshte2;
-}
-
-void Genome::chromosomes_storage(int n)
-{
-    for(int i=0 ; i<n ; i++)
-    {
-        cin>>HDNA[0];
-        cin>>HDNA[1];
-
-        reshte1.push_back(HDNA[0]);
-        reshte2.push_back(HDNA[1]);
-    }
-}
-
 // functions for Cell
 
 void Cell::cell_death()
 {
     //peivand kharab
     int x=0;
-    for(int i=0 ; i<get_reshte1().size() ; i++)
+    for(int i=0 ; i<reshte1.size() ; i++)
     {
-        if(get_reshte1()[0][i]=='A' && get_reshte2()[0][i]!='T')
+        if(reshte1[0][i]=='A' && reshte2[0][i]!='T')
         {x++;}
-        else if(get_reshte1()[0][i]=='T' && get_reshte2()[0][i]!='A')
+        else if(reshte1[0][i]=='T' && reshte2[0][i]!='A')
         {x++;}
-        else if(get_reshte1()[0][i]=='G' && get_reshte2()[0][i]!='C')
+        else if(reshte1[0][i]=='G' && reshte2[0][i]!='C')
         {x++;}
-        else if(get_reshte1()[0][i]=='C' && get_reshte2()[0][i]!='G')
+        else if(reshte1[0][i]=='C' && reshte2[0][i]!='G')
         {x++;}
     }
     //peivand AT , CG
     int AT=0 , CG=0;
-    for(int i=0 ; i<get_reshte1().size() ; i++)
+    for(int i=0 ; i<reshte1.size() ; i++)
     {
-        if(get_reshte1()[0][i]=='A' && get_reshte2()[0][i]=='T' || get_reshte1()[0][i]=='T' && get_reshte2()[0][i]=='A')
+        if(reshte1[0][i]=='A' && reshte2[0][i]=='T' || reshte1[0][i]=='T' && reshte2[0][i]=='A')
         {AT++;}
-        if(get_reshte1()[0][i]=='C' && get_reshte2()[0][i]=='G' || get_reshte1()[0][i]=='G' && get_reshte2()[0][i]=='C')
+        if(reshte1[0][i]=='C' && reshte2[0][i]=='G' || reshte1[0][i]=='G' && reshte2[0][i]=='C')
         {CG++;}
     }
     // delete cell
     if(x>5 || AT>3*CG)
     {
-        get_reshte1().erase(get_reshte1().begin() , get_reshte1().end());
-        get_reshte2().erase(get_reshte2().begin() , get_reshte2().end());
+        reshte1.erase(reshte1.begin() , reshte1.end());
+        reshte1.erase(reshte2.begin() , reshte2.end());
     }
 }
 
 void Cell::longMutation(string s1 , int n , string s2 , int m)
 {
     //chromosome n , s1
-    if(get_reshte1()[n-1].find(s1) < get_reshte2()[n-1].find(s1)) // s1 dar reshte avval peyda shode 
+    if(reshte1[n-1].find(s1) < reshte2[n-1].find(s1)) // s1 dar reshte avval peyda shode 
     {
         string BDNA = "";
         // BDNA : zirreshte ghabl az s1
-        for(int i = 0; i < get_reshte1()[n-1].find(s1); i++)
+        for(int i = 0; i < reshte1[n-1].find(s1); i++)
         {
-            BDNA += get_reshte1()[n-1][i];
+            BDNA += reshte1[n-1][i];
         } 
 
         string ADNA = "";
         // ADNA : zirreshte baad az s1
-        for(int i = BDNA.size() + s1.size(); i < get_reshte1()[n-1].size(); i++)
+        for(int i = BDNA.size() + s1.size(); i < reshte1[n-1].size(); i++)
         {
-            ADNA += get_reshte1()[n-1][i];
+            ADNA += reshte1[n-1][i];
         }
 
         // reshte jahesh yafte:
-        get_reshte1()[n-1] = BDNA + s2 + ADNA;
+        reshte1[n-1] = BDNA + s2 + ADNA;
 
         // mokamel giri dar reshte digar:
         string _s2 = "";
@@ -298,27 +275,27 @@ void Cell::longMutation(string s1 , int n , string s2 , int m)
         {
             _s2 += Complementary(s2[i]);
         }
-        get_reshte2()[n-1] = BDNA + _s2 + ADNA;
+        reshte2[n-1] = BDNA + _s2 + ADNA;
     }
 
     else // s1 dar reshte dovvom peyda shode
     {
         string BDNA = "";
         // BDNA : zirreshte ghabl az s1
-        for(int i = 0; i < get_reshte2()[n-1].find(s1); i++)
+        for(int i = 0; i < reshte2[n-1].find(s1); i++)
         {
-            BDNA +=get_reshte2()[n-1][i];
+            BDNA +=reshte2[n-1][i];
         } 
 
         string ADNA = "";
         // ADNA : zirreshte baad az s1
-        for(int i = BDNA.size() + s1.size(); i < get_reshte2()[n-1].size(); i++)
+        for(int i = BDNA.size() + s1.size(); i < reshte2[n-1].size(); i++)
         {
-            ADNA += get_reshte1()[n-1][i];
+            ADNA += reshte1[n-1][i];
         }
 
         // reshte jahesh yafte:
-        get_reshte2()[n-1] = BDNA + s2 + ADNA;
+        reshte2[n-1] = BDNA + s2 + ADNA;
 
         // mokamel giri dar reshte digar:
         string _s2 = "";
@@ -326,28 +303,28 @@ void Cell::longMutation(string s1 , int n , string s2 , int m)
         {
             _s2 += Complementary(s2[i]);
         }
-        get_reshte1()[n-1] = BDNA + _s2 + ADNA;
+        reshte1[n-1] = BDNA + _s2 + ADNA;
     }
 
     // chromosome m , s2
-    if(get_reshte1()[m-1].find(s2) < get_reshte2()[m-1].find(s2)) // s2 dar reshte avval peyda shode 
+    if(reshte1[m-1].find(s2) < reshte2[m-1].find(s2)) // s2 dar reshte avval peyda shode 
     {
         string BDNA = "";
         // BDNA : zirreshte ghabl az s2
-        for(int i = 0; i < get_reshte1()[m-1].find(s2); i++)
+        for(int i = 0; i < reshte1[m-1].find(s2); i++)
         {
-            BDNA += get_reshte1()[m-1][i];
+            BDNA += reshte1[m-1][i];
         } 
 
         string ADNA = "";
         // ADNA : zirreshte baad az s2
-        for(int i = BDNA.size() + s2.size(); i < get_reshte1()[m-1].size(); i++)
+        for(int i = BDNA.size() + s2.size(); i < reshte1[m-1].size(); i++)
         {
-            ADNA += get_reshte1()[m-1][i];
+            ADNA += reshte1[m-1][i];
         }
 
         // reshte jahesh yafte:
-        get_reshte1()[m-1] = BDNA + s1 + ADNA;
+        reshte1[m-1] = BDNA + s1 + ADNA;
 
         // mokamel giri dar reshte digar:
         string _s1 = "";
@@ -355,27 +332,27 @@ void Cell::longMutation(string s1 , int n , string s2 , int m)
         {
             _s1 += Complementary(s1[i]);
         }
-        get_reshte2()[m-1] = BDNA + _s1 + ADNA;
+       reshte2[m-1] = BDNA + _s1 + ADNA;
     }
 
     else // s2 dar reshte dovvom peyda shode
     {
         string BDNA = "";
         // BDNA : zirreshte ghabl az s2
-        for(int i = 0; i < get_reshte2()[m-1].find(s2); i++)
+        for(int i = 0; i < reshte2[m-1].find(s2); i++)
         {
-            BDNA +=get_reshte2()[m-1][i];
+            BDNA +=reshte2[m-1][i];
         } 
 
         string ADNA = "";
         // ADNA : zirreshte baad az s2
-        for(int i = BDNA.size() + s2.size(); i < get_reshte2()[m-1].size(); i++)
+        for(int i = BDNA.size() + s2.size(); i < reshte2[m-1].size(); i++)
         {
-            ADNA += get_reshte2()[m-1][i];
+            ADNA += reshte2[m-1][i];
         }
 
         // reshte jahesh yafte:
-        get_reshte2()[m-1] = BDNA + s1 + ADNA; 
+        reshte2[m-1] = BDNA + s1 + ADNA; 
 
         // mokamel giri dar reshte digar:
         string _s1 = "";
@@ -383,30 +360,30 @@ void Cell::longMutation(string s1 , int n , string s2 , int m)
         {
             _s1 += Complementary(s1[i]);
         }
-        get_reshte1()[m-1] = BDNA + _s1 + ADNA; 
+        reshte1[m-1] = BDNA + _s1 + ADNA; 
     }
 }
 
 void Cell::reverseMutation(string s1 , int n)
 {
-    if(get_reshte1()[n-1].find(s1) < get_reshte2()[n-1].find(s1)) // s1 dar reshte avval peyda shode
+    if(reshte1[n-1].find(s1) < reshte2[n-1].find(s1)) // s1 dar reshte avval peyda shode
     {
         string BDNA = "";
         // BDNA : zirreshte ghabl az s1
-        for(int i = 0; i < get_reshte1()[n-1].find(s1); i++)
+        for(int i = 0; i < reshte1[n-1].find(s1); i++)
         {
-            BDNA += get_reshte1()[n-1][i];
+            BDNA += reshte1[n-1][i];
         } 
 
         string ADNA = "";
         // ADNA : zirreshte baad az s1
-        for(int i = BDNA.size() + s1.size(); i < get_reshte1()[n-1].size(); i++)
+        for(int i = BDNA.size() + s1.size(); i < reshte1[n-1].size(); i++)
         {
-            ADNA += get_reshte1()[n-1][i];
+            ADNA += reshte1[n-1][i];
         }
 
         reverse(s1.begin(), s1.end());
-        get_reshte1()[n-1] = BDNA + s1 + ADNA;
+        reshte1[n-1] = BDNA + s1 + ADNA;
 
         // mokamel dar reshte digar:
             string _s1 = "";
@@ -414,27 +391,27 @@ void Cell::reverseMutation(string s1 , int n)
             {
                 _s1 += Complementary(s1[i]);
             }
-        get_reshte2()[n-1] = BDNA + _s1 + ADNA;
+        reshte2[n-1] = BDNA + _s1 + ADNA;
     }
 
     else // s1 dar reshte dovom peyda shode
     {
         string BDNA = "";
         // BDNA : zirreshte ghabl az s1
-        for(int i = 0; i < get_reshte2()[n-1].find(s1); i++)
+        for(int i = 0; i < reshte2[n-1].find(s1); i++)
         {
-            BDNA += get_reshte2()[n-1][i];
+            BDNA += reshte2[n-1][i];
         } 
 
         string ADNA = "";
         // ADNA : zirreshte baad az s1
-        for(int i = BDNA.size() + s1.size(); i < get_reshte2()[n-1].size(); i++)
+        for(int i = BDNA.size() + s1.size(); i < reshte2[n-1].size(); i++)
         {
-            ADNA +=get_reshte2()[n-1][i];
+            ADNA +=reshte2[n-1][i];
         }
 
         reverse(s1.begin(), s1.end());
-        get_reshte2()[n-1] = BDNA + s1 + ADNA;
+        reshte2[n-1] = BDNA + s1 + ADNA;
 
         // mokamel dar reshte digar:
             string _s1 = "";
@@ -442,7 +419,42 @@ void Cell::reverseMutation(string s1 , int n)
             {
                 _s1 += Complementary(s1[i]);
             }
-        get_reshte1()[n-1] = BDNA + _s1 + ADNA;
+        reshte1[n-1] = BDNA + _s1 + ADNA;
+    }
+}
+
+void Cell::mutation(char char1, char char2, int n , int m)
+{
+    // mutation for DNA
+    int target2 = 0;
+    for (int i = 0; i < reshte1[m-1].size(); i++)
+    {
+        if( reshte1[m-1][i] == char1)
+        {
+            reshte1[m-1][i] = char2;
+            reshte2[m-1][i] = Complementary(char2);
+            target2++;
+        }
+        if( reshte2[m-1][i] == char1)
+        {
+            reshte2[m-1][i] = char2;
+            reshte1[m-1][i] = Complementary(char2);
+            target2++;
+        }
+        if (target2 == n) { break; }
+    }
+}
+
+void Cell::chromosomes_storage(int n)
+{
+    string HDNA1="" , HDNA2="";
+    for(int i=0 ; i<n ; i++)
+    {
+        cin>>HDNA1;
+        cin>>HDNA2;
+
+        reshte1.push_back(HDNA1);
+        reshte2.push_back(HDNA2);
     }
 }
 
