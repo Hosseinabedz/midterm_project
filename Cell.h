@@ -27,6 +27,7 @@ public:
 
     // saakht DNA az RNA
     void RNAtoDNA();
+<<<<<<< HEAD
 
     //jahesh koochak
     void mutation(char char1, char char2, int n);
@@ -49,4 +50,13 @@ private:
 public:
     // Cell death
     void cell_death();
+=======
+    //jahesh koochak
+    void mutation(char char1, char char2, int n);
+    //jahesh bozorg
+    void longMutation(string s1, string s2);
+    // jahesh maakoos
+    void reverseMutation(string s1);
+
+>>>>>>> f6f87904e7916f0b3d1e25ae3b8cb76d6b746197
 };
