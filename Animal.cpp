@@ -1,57 +1,6 @@
 #include "Animal.h"
 
-void Animal::ComparisonOfChromosomes(vector<Genome> chro1, vector<Genome> chro2)
-{
-    int sum1 = 0;
-    for(int i = 0; i < chro1.size(); i++)
-    {
-        int MAX1 = 0;
-        for(int j = 0; j < chro2.size(); j++)
-        {
-            int A = PercentageOfSimilarity(chro1[i].getDNA1(), chro2[j].getDNA1());
-            int B = PercentageOfSimilarity(chro1[i].getDNA2(), chro2[j].getDNA2());
-            int C = PercentageOfSimilarity(chro1[i].getDNA1(), chro2[j].getDNA2());
-            int D = PercentageOfSimilarity(chro1[i].getDNA2(), chro2[j].getDNA1());
-            int AB = (A + B) / 2;
-            int CD = (C + D) / 2;
-            int percentage_two_chro = max(AB, CD);
-            if(percentage_two_chro > MAX1)
-            {
-                MAX1 = percentage_two_chro;
-            }     
-        }
-        sum1 += MAX1;
-    }
-    int average_chro1_chro2 = sum1 / chro1.size();
-
-    int sum2 = 0;
-    for(int i = 0; i < chro2.size(); i++)
-    {
-        int MAX2 = 0;
-        for(int j = 0; j < chro1.size(); j++)
-        {
-            int A = PercentageOfSimilarity(chro1[i].getDNA1(), chro2[j].getDNA1());
-            int B = PercentageOfSimilarity(chro1[i].getDNA2(), chro2[j].getDNA2());
-            int C = PercentageOfSimilarity(chro1[i].getDNA1(), chro2[j].getDNA2());
-            int D = PercentageOfSimilarity(chro1[i].getDNA2(), chro2[j].getDNA1());
-            int AB = (A + B) / 2;
-            int CD = (C + D) / 2;
-            int percentage_two_chro = max(AB, CD);
-            if(percentage_two_chro > MAX2)
-            {
-                MAX2 = percentage_two_chro;
-            }     
-        }
-        sum1 += MAX2;
-    }
-    int average_chro2_chro1 = sum2 / chro2.size();
-
-    // mohasebe darsad genetici nahaei
-    float final = (average_chro1_chro2 + average_chro2_chro1) / (2 * 100);    
-
-}
-
-int Animal::getEditDistance(string s1, string s2)
+int getEditDistance(string s1, string s2)
 {
 int n = s1.size();
     int m = s2.size();
@@ -84,7 +33,7 @@ int n = s1.size();
     return prev[m];
 }
 
-double Animal::PercentageOfSimilarity(string s1, string s2)
+double SimilarityPercentageOfTwoChromosomes(string s1, string s2)
 {
     double max_length = max(s1.length(), s2.length());
     if (max_length > 0) {
@@ -93,6 +42,59 @@ double Animal::PercentageOfSimilarity(string s1, string s2)
     return 1.0;
 
 }
+
+
+void Animal::SimilarityPercentageOfTwoAnimal(vector<Genome> chro1, vector<Genome> chro2)
+{
+    int sum1 = 0;
+    for(int i = 0; i < chro1.size(); i++)
+    {
+        int MAX1 = 0;
+        for(int j = 0; j < chro2.size(); j++)
+        {
+            int A = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA1());
+            int B = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA2());
+            int C = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA2());
+            int D = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA1());
+            int AB = (A + B) / 2;
+            int CD = (C + D) / 2;
+            int percentage_two_chro = max(AB, CD);
+            if(percentage_two_chro > MAX1)
+            {
+                MAX1 = percentage_two_chro;
+            }     
+        }
+        sum1 += MAX1;
+    }
+    int average_chro1_chro2 = sum1 / chro1.size();
+
+    int sum2 = 0;
+    for(int i = 0; i < chro2.size(); i++)
+    {
+        int MAX2 = 0;
+        for(int j = 0; j < chro1.size(); j++)
+        {
+            int A = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA1());
+            int B = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA2());
+            int C = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA2());
+            int D = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA1());
+            int AB = (A + B) / 2;
+            int CD = (C + D) / 2;
+            int percentage_two_chro = max(AB, CD);
+            if(percentage_two_chro > MAX2)
+            {
+                MAX2 = percentage_two_chro;
+            }     
+        }
+        sum1 += MAX2;
+    }
+    int average_chro2_chro1 = sum2 / chro2.size();
+
+    // mohasebe darsad genetici nahaei
+    float final = (average_chro1_chro2 + average_chro2_chro1) / (2 * 100);    
+
+}
+
 
 int main()
 {
