@@ -5,22 +5,58 @@
 char Complementary(char nokleotid)
 {
     if (nokleotid == 'A')
-    {
         return 'T';
-    }
     else if (nokleotid == 'T')
-    {
         return 'A';
-    }
     else if (nokleotid == 'C')
-    {
         return 'G';
-    }
     else if (nokleotid == 'G')
-    {
         return 'C';
-    }
     return ' ';
+}
+
+string Complementary(string str)
+{
+    for (int i = 0; i < str.size(); i++)
+    {
+        if (str[i] == 'A')
+            str[i] = 'T';
+        else if (str[i] == 'T')
+            str[i] = 'A';
+        else if (str[i] == 'C')
+            str[i] = 'G';
+        else if (str[i] == 'G')
+            str[i] = 'C';
+    }
+    return str;
+}
+
+bool isPalindrome(string str)
+{
+    string str1 = "";
+    string str2 = "";
+    for (int i = 0; i < str.size() / 2; i++)
+    {
+        str1 += str[i];
+    }
+    for (int i = str.size() / 2; i < str.size(); i++)
+    {
+        str2 += str[i];
+    }
+
+    if (str1 == Complementary(str2))
+        return true;
+    return false;
+}
+
+string substr(string str, int n, int m)
+{
+    string result = "";
+    for(int i = n; i < m; i++)
+    {
+        result += str[i];
+    }
+    return result;
 }
 
 void Genome::RNAtoDNA()
@@ -256,7 +292,7 @@ void Cell::cell_death()
     int AT = 0, CG = 0;
     for (int i = 0; i < chromosomes.size(); i++)
     {
-        for(int j = 0; j < chromosomes[i].DNA[0].size(); j++)
+        for (int j = 0; j < chromosomes[i].DNA[0].size(); j++)
         {
             if (chromosomes[i].DNA[0][j] == 'A' && chromosomes[i].DNA[1][j] == 'T' || chromosomes[i].DNA[0][j] == 'T' && chromosomes[i].DNA[1][j] == 'A')
             {
@@ -279,9 +315,8 @@ void Cell::cell_death()
 
 void Cell::longMutation(string s1, int n, string s2, int m)
 {
-    chromosomes[n].longMutation(s1,s2);
-    chromosomes[m].longMutation(s2,s1);
-    
+    chromosomes[n].longMutation(s1, s2);
+    chromosomes[m].longMutation(s2, s1);
 }
 
 void Cell::reverseMutation(string s1, int n)
@@ -294,8 +329,34 @@ void Cell::mutation(char char1, char char2, int n, int m)
     chromosomes[m].mutation(char1, char2, n);
 }
 
-int main()
+void Cell::FindPalindrome(string str)
 {
 
+    for (int i = 0; i < str.size() - 4; i++)
+    {
+        int temp = 3;
+        while ((i + temp) < str.size())
+        {
+            string substring = substr(str, i, temp + 1 + i);
+            if (isPalindrome(substring))
+            {
+                cout << substring << endl;
+            };
+            temp += 2;
+        }
+    }
+}
+
+void Cell::PrintAllPalindromes(int n)
+{
+    cout << "all palindrome in first string of DNA: " << endl;
+    FindPalindrome(chromosomes[n].DNA[0]);
+    cout << "all palindrome in second string of DNA: " << endl;
+    FindPalindrome(chromosomes[n].DNA[1]);
+}
+
+int main()
+{
+       
     return 0;
 }

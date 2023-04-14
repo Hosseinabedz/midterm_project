@@ -7,6 +7,9 @@ using namespace std;
 
 // mokamelsaz
 char Complementary(char nokleotid);
+string Complementary(string str);
+bool isPalindrome(string str);
+string substr(string str, int n, int m);
 
 class Genome
 {
@@ -61,4 +64,11 @@ public:
 
     //jahesh koochak
     void mutation(char char1, char char2, int n, int m);
+
+    //palindrome
+    void palindrome(Genome chromosome);
+
+    void FindPalindrome(string str);
+
+    void PrintAllPalindromes(int n);
 };
