@@ -30,6 +30,9 @@ public:
         this->DNA[0] = _DNA;
         this->DNA[1] = _DNA2;
     }
+
+    string getDNA1() { return DNA[0]; }
+    string getDNA2() { return DNA[1]; }
     // saakht DNA az RNA
     void RNAtoDNA();
 
