@@ -43,7 +43,7 @@ bool isPalindrome(string str)
     {
         str2 += str[i];
     }
-
+    reverse(str2.begin(), str2.end());
     if (str1 == Complementary(str2))
         return true;
     return false;
@@ -263,8 +263,8 @@ void Genome::reverseMutation(string s1)
 
 void Cell::chromosomes_storage(vector<Genome> n)
 {
-    for (auto x : n)
-        chromosomes.push_back(x);
+    for (auto i : n)
+        chromosomes.push_back(i);
 }
 
 // functions for Cell
@@ -357,6 +357,5 @@ void Cell::PrintAllPalindromes(int n)
 
 int main()
 {
-       
     return 0;
 }

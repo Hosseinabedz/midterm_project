@@ -5,7 +5,7 @@
 #include <algorithm>
 using namespace std;
 
-// mokamelsaz
+// mokammelsaz
 char Complementary(char nokleotid);
 string Complementary(string str);
 bool isPalindrome(string str);
@@ -46,9 +46,12 @@ public:
 
 class Cell : public Genome
 {
-private:
+protected:
+    int numChrom;
     vector<Genome> chromosomes;
 public:
+
+    Cell() {}
 
     // chromosome storage 
     void chromosomes_storage(vector<Genome> n);
@@ -64,9 +67,6 @@ public:
 
     //jahesh koochak
     void mutation(char char1, char char2, int n, int m);
-
-    //palindrome
-    void palindrome(Genome chromosome);
 
     void FindPalindrome(string str);
 
