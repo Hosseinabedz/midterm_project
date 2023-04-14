@@ -37,28 +37,28 @@ double SimilarityPercentageOfTwoChromosomes(string s1, string s2)
 {
     double max_length = max(s1.length(), s2.length());
     if (max_length > 0) {
-        return (max_length - getEditDistance(s1, s2)) / max_length;
+        return ((max_length - getEditDistance(s1, s2)) / max_length) * 100;
     }
     return 1.0;
 
 }
 
 
-void Animal::SimilarityPercentageOfTwoAnimal(vector<Genome> chro1, vector<Genome> chro2)
+float Animal::SimilarityPercentageOfTwoAnimal(vector<Genome> chro1, vector<Genome> chro2)
 {
-    int sum1 = 0;
+    double sum1 = 0;
     for(int i = 0; i < chro1.size(); i++)
     {
-        int MAX1 = 0;
+        double MAX1 = 0;
         for(int j = 0; j < chro2.size(); j++)
         {
-            int A = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA1());
-            int B = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA2());
-            int C = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA2());
-            int D = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA1());
-            int AB = (A + B) / 2;
-            int CD = (C + D) / 2;
-            int percentage_two_chro = max(AB, CD);
+            double A = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA1());
+            double B = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA2());
+            double C = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA2());
+            double D = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA1());
+            double AB = (A + B) / 2;
+            double CD = (C + D) / 2;
+            double percentage_two_chro = max(AB, CD);
             if(percentage_two_chro > MAX1)
             {
                 MAX1 = percentage_two_chro;
@@ -66,21 +66,21 @@ void Animal::SimilarityPercentageOfTwoAnimal(vector<Genome> chro1, vector<Genome
         }
         sum1 += MAX1;
     }
-    int average_chro1_chro2 = sum1 / chro1.size();
+    double average_chro1_chro2 = sum1 / chro1.size();
 
-    int sum2 = 0;
+    double sum2 = 0;
     for(int i = 0; i < chro2.size(); i++)
     {
-        int MAX2 = 0;
+        double MAX2 = 0;
         for(int j = 0; j < chro1.size(); j++)
         {
-            int A = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA1());
-            int B = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA2());
-            int C = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA2());
-            int D = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA1());
-            int AB = (A + B) / 2;
-            int CD = (C + D) / 2;
-            int percentage_two_chro = max(AB, CD);
+            double A = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA1());
+            double B = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA2());
+            double C = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA1(), chro2[j].getDNA2());
+            double D = SimilarityPercentageOfTwoChromosomes(chro1[i].getDNA2(), chro2[j].getDNA1());
+            double AB = (A + B) / 2;
+            double CD = (C + D) / 2;
+            double percentage_two_chro = max(AB, CD);
             if(percentage_two_chro > MAX2)
             {
                 MAX2 = percentage_two_chro;
@@ -88,11 +88,21 @@ void Animal::SimilarityPercentageOfTwoAnimal(vector<Genome> chro1, vector<Genome
         }
         sum1 += MAX2;
     }
-    int average_chro2_chro1 = sum2 / chro2.size();
+    double average_chro2_chro1 = sum2 / chro2.size();
 
     // mohasebe darsad genetici nahaei
-    float final = (average_chro1_chro2 + average_chro2_chro1) / (2 * 100);    
+    double final = ((average_chro1_chro2 + average_chro2_chro1) / 2);   
+    return final; 
 
+}
+
+bool Animal::operator==(Animal& A)
+{
+    if(SimilarityPercentageOfTwoAnimal(chromosomes, A.chromosomes) >= 0.7 and chromosomes.size() == A.chromosomes.size())
+    {
+        return true;
+    }
+    return false;
 }
 
 
