@@ -1,4 +1,5 @@
 #include "Animal.h"
+#include <bits/stdc++.h>
 
 int getEditDistance(string s1, string s2)
 {
@@ -98,15 +99,67 @@ float Animal::SimilarityPercentageOfTwoAnimal(vector<Genome> chro1, vector<Genom
 
 bool Animal::operator==(Animal& A)
 {
-    if(SimilarityPercentageOfTwoAnimal(chromosomes, A.chromosomes) >= 0.7 and chromosomes.size() == A.chromosomes.size())
+    if(
+        SimilarityPercentageOfTwoAnimal(chromosomes, A.chromosomes) >= 70 &&
+        chromosomes.size() == A.chromosomes.size()
+    )
     {
         return true;
     }
     return false;
 }
 
+Animal Animal::AsexualReproduction()
+{
+    // tedad chromosom ha 2 barabar mishavad:
+    vector<Genome> n2Chromosomes = chromosomes;
+    for(auto & i : chromosomes)
+    {
+        n2Chromosomes.push_back(i);
+    }
+
+    // sakhtane bache ba darsad tashabohe >= 70%:
+    int count = ceil((0.7 * n2Chromosomes.size()));
+    vector<Genome> childChromosomes;
+    // sakht 70% az chromosom ha ke tekrari nabashand
+    while(count > 0)
+    {
+        int index = rand() % n2Chromosomes.size();
+        bool flag = true;
+        for(int i = 0; i < childChromosomes.size(); i++)
+        {
+            if(childChromosomes[i].getDNA1() == n2Chromosomes[index].getDNA1())
+            {
+                flag = false;
+            }
+        }
+        if(flag == true)
+        {
+            childChromosomes.push_back(n2Chromosomes[index]);
+            count--;
+        }
+    }
+    //sakht baghie chromosom ha
+    for(int i = 0; i < n2Chromosomes.size() - count; i++)
+    {
+        int index2 = rand() % (n2Chromosomes.size() - count);
+        childChromosomes.push_back(n2Chromosomes[index2]);
+    }
+
+    Animal animal(childChromosomes);
+    return animal;
+
+
+
+
+
+}
+
+
+
 
 int main()
 {
+    srand(time(NULL)); 
     return 0;
 }
