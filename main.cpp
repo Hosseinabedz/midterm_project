@@ -10,10 +10,11 @@ using namespace std;
 int main()
 {
     Genome G;
+    Cell C;
 
     string rna , dna1 , dna2;
 
-    cout<<" enter the RNA : ";
+    cout<<"enter the RNA : ";
     cin>>rna;
     G.setRNA(rna);
 
@@ -40,7 +41,8 @@ cout<<endl;
         cout<<"Enter 2 to make a small mutation"<<endl;
         cout<<"Enter 3 to make a long Mutation"<<endl;
         cout<<"Enter 4 to make a reverse Mutation"<<endl;
-    
+        cout<<"Enter 5 to enter cell chromosomes"<<endl;
+        
         cout<<"Enter 0 to end the process"<<endl;
         cout<<"Enter number : ";
 
@@ -91,7 +93,7 @@ cout<<endl;
             cout<<"DNA : "<<G.get_DNA1()<<endl;
             cout<<"      "<<G.get_DNA2()<<endl;
         }
-        else if(x==4)
+        else if(x==4) 
         {
             string s1;
             cout<<"enter your desired substring to reverse mutation : ";
@@ -103,7 +105,26 @@ cout<<endl;
             cout<<"DNA : "<<G.get_DNA1()<<endl;
             cout<<"      "<<G.get_DNA2()<<endl;
         }
-  
+        else if(x==5)
+        {
+            
+        }
+        else if(x==6)
+        {
+            
+        }
+        else if(x==7)
+        {
+        
+        }
+        else if(x==8)
+        {
+        
+        }
+        else if(x==9)
+        {
+
+        }
     }
 
       
