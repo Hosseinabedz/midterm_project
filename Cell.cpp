@@ -263,13 +263,13 @@ void Genome::reverseMutation(string s1)
     }
 }
 
+// funtions for Cell
+
 void Cell::chromosomes_storage(vector<Genome> n)
 {
     for (auto i : n)
         chromosomes.push_back(i);
 }
-
-// functions for Cell
 
 void Cell::cell_death()
 {

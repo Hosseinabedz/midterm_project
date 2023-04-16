@@ -45,7 +45,6 @@ public:
 class Cell : public Genome
 {
 protected:
-    int numChrom;
     vector<Genome> chromosomes;
 public:
 
