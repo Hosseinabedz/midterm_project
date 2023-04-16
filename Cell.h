@@ -1,8 +1,3 @@
-#include <iostream>
-#include <math.h>
-#include <string>
-#include <vector>
-#include <algorithm>
 using namespace std;
 
 // mokammelsaz
@@ -30,7 +25,7 @@ public:
         this->DNA[0] = _DNA;
         this->DNA[1] = _DNA2;
     }
-
+    string getRNA() { return RNA;}
     string getDNA1() { return DNA[0]; }
     string getDNA2() { return DNA[1]; }
     // saakht DNA az RNA

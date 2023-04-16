@@ -1,5 +1,4 @@
 #include "Animal.h"
-#include <bits/stdc++.h>
 
 int getEditDistance(string s1, string s2)
 {
@@ -148,18 +147,4 @@ Animal Animal::AsexualReproduction()
 
     Animal animal(childChromosomes);
     return animal;
-
-
-
-
-
-}
-
-
-
-
-int main()
-{
-    srand(time(NULL)); 
-    return 0;
 }

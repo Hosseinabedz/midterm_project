@@ -1,5 +1,7 @@
+#include <bits/stdc++.h>
 #include "Cell.h"
 
+using namespace std;
 // functions for Genome
 
 char Complementary(char nokleotid)
@@ -353,9 +355,4 @@ void Cell::PrintAllPalindromes(int n)
     FindPalindrome(chromosomes[n].DNA[0]);
     cout << "all palindrome in second string of DNA: " << endl;
     FindPalindrome(chromosomes[n].DNA[1]);
-}
-
-int main()
-{
-    return 0;
 }

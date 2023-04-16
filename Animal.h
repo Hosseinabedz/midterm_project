@@ -1,4 +1,4 @@
-#include "Cell.h"
+#include "Cell.cpp"
 
 //darsad tashabohe do chromosome dade shode
     double SimilarityPercentageOfTwoChromosomes(string s1, string s2);
