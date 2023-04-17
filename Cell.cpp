@@ -2,7 +2,24 @@
 #include "Cell.h"
 
 using namespace std;
-// functions for Genome
+
+string _replace(string str, string s1, string s2)
+{
+    string Bstr = "";
+    int findstr = str.find(s1);
+    // BRNA : zirreshte ghabl az s1
+    for (int i = 0; i < findstr; i++)
+    {
+        Bstr += str[i];
+    }
+    string Astr = "";
+    // ARNA : zirreshte baad az s1
+    for (int i = Bstr.size() + s1.size(); i < str.size(); i++)
+    {
+        Astr += str[i];
+    }
+        return Bstr + s2 + Astr;
+}
 
 char Complementary(char nokleotid)
 {
@@ -61,6 +78,8 @@ string substr(string str, int n, int m)
     return result;
 }
 
+// functions for Genome
+
 void Genome::RNAtoDNA()
 {
     cout << "DNA from RNA :" << endl
@@ -115,75 +134,22 @@ void Genome::mutation(char char1, char char2, int n)
 void Genome::longMutation(string s1, string s2)
 {
     // longmutation for RNA:
-    string BRNA = "";
-    // BRNA : zirreshte ghabl az s1
-    for (int i = 0; i < RNA.find(s1); i++)
-    {
-        BRNA += RNA[i];
-    }
-    string ARNA = "";
-    // ARNA : zirreshte baad az s1
-    for (int i = BRNA.size() + s1.size(); i < RNA.size(); i++)
-    {
-        ARNA += RNA[i];
-    }
-
-    // RNA jahesh yafte:
-    RNA = BRNA + s2 + ARNA;
-
+        RNA = _replace(RNA, s1, s2);
+    
     // longmutation for DNA
     if (DNA[0].find(s1) < DNA[1].find(s1)) // s1 dar reshte avval peyda shode
     {
-        string BDNA = "";
-        // BDNA : zirreshte ghabl az s1
-        for (int i = 0; i < DNA[0].find(s1); i++)
-        {
-            BDNA += DNA[0][i];
-        }
-
-        string ADNA = "";
-        // ADNA : zirreshte baad az s1
-        for (int i = BDNA.size() + s1.size(); i < DNA[0].size(); i++)
-        {
-            ADNA += DNA[0][i];
-        }
-
-        // DNA jahesh yafte:
-        DNA[0] = BDNA + s2 + ADNA;
+        DNA[0] = _replace(DNA[0], s1, s2);
         // mokamel giri dar reshte digar:
-        string _s2 = "";
-        for (int i = 0; i < s2.size(); i++)
-        {
-            _s2 += Complementary(s2[i]);
-        }
-        DNA[1] = BDNA + _s2 + ADNA;
+        DNA[1] = Complementary(DNA[0]);
     }
 
     else // s1 dar reshte dovvom peyda shode
     {
-        string BDNA = "";
-        // BDNA : zirreshte ghabl az s1
-        for (int i = 0; i < DNA[1].find(s1); i++)
-        {
-            BDNA += DNA[1][i];
-        }
-
-        string ADNA = "";
-        // ADNA : zirreshte baad az s1
-        for (int i = BDNA.size() + s1.size(); i < DNA[1].size(); i++)
-        {
-            ADNA += DNA[1][i];
-        }
-
-        // DNA jahesh yafte:
-        DNA[1] = BDNA + s2 + ADNA;
+        DNA[1] = _replace(DNA[1], s1, s2);
         // mokamel giri dar reshte digar:
-        string _s2 = "";
-        for (int i = 0; i < s2.size(); i++)
-        {
-            _s2 += Complementary(s2[i]);
-        }
-        DNA[0] = BDNA + _s2 + ADNA;
+        DNA[0] = Complementary(DNA[0]);
+        
     }
 }
 

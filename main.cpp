@@ -177,7 +177,7 @@ int main()
                cin >> substr2;
 
                cout << "number of second chromosome : ";
-               cin >> num2;
+               cin >> 
 
                C.longMutation(substr1, num1, substr2, num2);
 
@@ -198,7 +198,7 @@ int main()
                cin >> n;
 
                C.reverseMutation(s1,n);
-               
+
           }
           else if (choice2 == 4)
           {

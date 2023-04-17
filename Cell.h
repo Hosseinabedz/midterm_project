@@ -1,6 +1,5 @@
 using namespace std;
-
-// mokammelsaz
+string _replace(string str, string s1, string s2);
 char Complementary(char nokleotid);
 string Complementary(string str);
 bool isPalindrome(string str);
