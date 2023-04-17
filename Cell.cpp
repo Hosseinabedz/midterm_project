@@ -42,6 +42,7 @@ string _reverse(string str, string s)
     // reverse mutation RNA:
     return Bstr + s + Astr;
 }
+
 char Complementary(char nokleotid)
 {
     if (nokleotid == 'A')
@@ -246,6 +247,7 @@ void Cell::cell_death()
     if (x > 5 || AT > 3 * CG)
     {
         chromosomes.clear();
+        cout << "Cell died out!" << endl; 
         delete this;
     }
 }

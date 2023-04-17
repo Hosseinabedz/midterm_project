@@ -10,6 +10,8 @@ class Animal : public Cell
 {
     public:
 
+        Animal() {}
+
         Animal(vector<Genome> _chromosome)
         {
             this->chromosomes = _chromosome;
@@ -22,5 +24,8 @@ class Animal : public Cell
 
         // tolid mesle gheyr jensi
         Animal AsexualReproduction();
+
+        Animal operator+(Animal& A);
         
+        void cell_death();
 };

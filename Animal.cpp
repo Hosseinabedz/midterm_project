@@ -91,7 +91,7 @@ float Animal::SimilarityPercentageOfTwoAnimal(vector<Genome> chro1, vector<Genom
     double average_chro2_chro1 = sum2 / chro2.size();
 
     // mohasebe darsad genetici nahaei
-    double final = ((average_chro1_chro2 + average_chro2_chro1) / 2);   
+    double final = ((average_chro1_chro2 + average_chro2_chro1));   
     return final; 
 
 }
@@ -109,6 +109,7 @@ bool Animal::operator==(Animal& A)
 }
 
 Animal Animal::AsexualReproduction()
+
 {
     // tedad chromosom ha 2 barabar mishavad:
     vector<Genome> n2Chromosomes = chromosomes;
@@ -147,4 +148,55 @@ Animal Animal::AsexualReproduction()
 
     Animal animal(childChromosomes);
     return animal;
+}
+
+Animal Animal::operator+(Animal& A)
+{
+    AsexualReproduction();
+    A.AsexualReproduction();
+
+    // n zoj bashad
+    if(chromosomes.size() % 2 == 0 || A.chromosomes.size() % 2 == 0)
+    {
+        vector<Genome> animalChild;
+        Animal child;
+        // darsad tashabohe >= 70%
+        while(true)
+        {
+            animalChild.clear();
+            // nesfe chromosom ha az obj1:
+            for(int i = 0; i < chromosomes.size() / 2; i++)
+            {
+                int ch1 = rand() % chromosomes.size();
+                animalChild.push_back(chromosomes[ch1]);
+            }
+            // nesfe chromosom ha az obj2:
+            for(int i = 0; i < A.chromosomes.size() / 2; i++)
+            {
+                int ch2 = rand() % A.chromosomes.size();
+                animalChild.push_back(A.chromosomes[ch2]);
+            }
+
+            if(child.SimilarityPercentageOfTwoAnimal(chromosomes, A.chromosomes) >= 70)
+            {
+                break;
+            }
+        }
+
+        return child;
+    }
+        else // n fard bashad
+        {
+            cout << "Child can't be created!" << endl;
+            Animal notChild;
+            return notChild;
+            
+        }
+
+    
+}
+
+void Animal::cell_death()
+{
+    cell_death();
 }
