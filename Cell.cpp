@@ -4,6 +4,7 @@
 using namespace std;
 
 string _replace(string str, string s1, string s2)
+
 {
     string Bstr = "";
     int findstr = str.find(s1);
@@ -21,6 +22,26 @@ string _replace(string str, string s1, string s2)
         return Bstr + s2 + Astr;
 }
 
+string _reverse(string str, string s)
+{
+    string Bstr = "";
+    // Bstr : zirreshte ghabl az s1
+    int findstr1 = str.find(s);
+    for (int i = 0; i < findstr1; i++)
+    {
+        Bstr += str[i];
+    }
+    string Astr = "";
+    // ARNA : zirreshte baad az s1
+    for (int i = Bstr.size() + s.size(); i < str.size(); i++)
+    {
+        Astr += str[i];
+    }
+
+    reverse(s.begin(), s.end());
+    // reverse mutation RNA:
+    return Bstr + s + Astr;
+}
 char Complementary(char nokleotid)
 {
     if (nokleotid == 'A')
@@ -148,7 +169,7 @@ void Genome::longMutation(string s1, string s2)
     {
         DNA[1] = _replace(DNA[1], s1, s2);
         // mokamel giri dar reshte digar:
-        DNA[0] = Complementary(DNA[0]);
+        DNA[0] = Complementary(DNA[1]);
         
     }
 }
@@ -156,76 +177,21 @@ void Genome::longMutation(string s1, string s2)
 void Genome::reverseMutation(string s1)
 {
     // reverse for RNA:
-    string BRNA = "";
-    // BRNA : zirreshte ghabl az s1
-    for (int i = 0; i < RNA.find(s1); i++)
-    {
-        BRNA += RNA[i];
-    }
-    string ARNA = "";
-    // ARNA : zirreshte baad az s1
-    for (int i = BRNA.size() + s1.size(); i < RNA.size(); i++)
-    {
-        ARNA += RNA[i];
-    }
-
-    reverse(s1.begin(), s1.end());
-    // reverse mutation RNA:
-    RNA = BRNA + s1 + ARNA;
+    RNA = _reverse(RNA, s1);
 
     // reverse for DNA:
     if (DNA[0].find(s1) < DNA[1].find(s1)) // s1 dar reshte avval peyda shode
     {
-        string BDNA = "";
-        // BDNA : zirreshte ghabl az s1
-        for (int i = 0; i < DNA[0].find(s1); i++)
-        {
-            BDNA += DNA[0][i];
-        }
-
-        string ADNA = "";
-        // ADNA : zirreshte baad az s1
-        for (int i = BDNA.size() + s1.size(); i < DNA[0].size(); i++)
-        {
-            ADNA += DNA[0][i];
-        }
-
-        reverse(s1.begin(), s1.end());
-        DNA[0] = BDNA + s1 + ADNA;
+        DNA[0] = _reverse(DNA[0], s1);
         // mokamel dar reshte digar:
-        string _s1 = "";
-        for (int i = 0; i < s1.size(); i++)
-        {
-            _s1 += Complementary(s1[i]);
-        }
-        DNA[1] = BDNA + _s1 + ADNA;
+        DNA[1] = Complementary(DNA[0]);
     }
 
     else // s1 dar reshte dovom peyda shode
     {
-        string BDNA = "";
-        // BDNA : zirreshte ghabl az s1
-        for (int i = 0; i < DNA[1].find(s1); i++)
-        {
-            BDNA += DNA[1][i];
-        }
-
-        string ADNA = "";
-        // ADNA : zirreshte baad az s1
-        for (int i = BDNA.size() + s1.size(); i < DNA[1].size(); i++)
-        {
-            ADNA += DNA[1][i];
-        }
-
-        reverse(s1.begin(), s1.end());
-        DNA[1] = BDNA + s1 + ADNA;
-        // mokamel dar reshte digar:
-        string _s1 = "";
-        for (int i = 0; i < s1.size(); i++)
-        {
-            _s1 += Complementary(s1[i]);
-        }
-        DNA[0] = BDNA + _s1 + ADNA;
+       DNA[1] = _reverse(DNA[1], s1);
+       // mokamel dar reshte digar:
+       DNA[0] = Complementary(DNA[1]);
     }
 }
 
