@@ -115,9 +115,10 @@ void Genome::RNAtoDNA()
 void Genome::mutation(char char1, char char2, int n)
 {
     // mutation for RNA
-    int target = 0;
+    int target = 0; 
     for (int i = 0; i < RNA.size(); i++)
     {
+
         if (RNA[i] == char1)
         {
             RNA[i] = char2;
@@ -139,7 +140,7 @@ void Genome::mutation(char char1, char char2, int n)
             DNA[1][i] = Complementary(char2);
             target2++;
         }
-        if (DNA[1][i] == char1)
+        else if (DNA[1][i] == char1)
         {
             DNA[1][i] = char2;
             DNA[0][i] = Complementary(char2);
@@ -203,6 +204,8 @@ void Cell::chromosomes_storage(vector<Genome> n)
         chromosomes.push_back(i);
 }
 
+vector<Genome> Cell:: getChromosomes() { return this->chromosomes;}
+
 void Cell::cell_death()
 {
     // peivand kharab
@@ -249,8 +252,8 @@ void Cell::cell_death()
 
 void Cell::longMutation(string s1, int n, string s2, int m)
 {
-    chromosomes[n].longMutation(s1, s2);
-    chromosomes[m].longMutation(s2, s1);
+    chromosomes[n - 1].longMutation(s1, s2);
+    chromosomes[m - 1].longMutation(s2, s1);
 }
 
 void Cell::reverseMutation(string s1, int n)
@@ -260,7 +263,7 @@ void Cell::reverseMutation(string s1, int n)
 
 void Cell::mutation(char char1, char char2, int n, int m)
 {
-    chromosomes[m].mutation(char1, char2, n);
+    chromosomes[m-1].mutation(char1, char2, n);
 }
 
 void Cell::FindPalindrome(string str)
@@ -284,7 +287,7 @@ void Cell::FindPalindrome(string str)
 void Cell::PrintAllPalindromes(int n)
 {
     cout << "all palindrome in first string of DNA: " << endl;
-    FindPalindrome(chromosomes[n].DNA[0]);
+    FindPalindrome(chromosomes[n - 1].DNA[0]);
     cout << "all palindrome in second string of DNA: " << endl;
-    FindPalindrome(chromosomes[n].DNA[1]);
+    FindPalindrome(chromosomes[n - 1].DNA[1]);
 }

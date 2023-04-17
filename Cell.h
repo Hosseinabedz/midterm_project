@@ -21,6 +21,7 @@ public:
     }
     Genome(string _DNA, string _DNA2)
     {
+        RNA = "";
         this->DNA[0] = _DNA;
         this->DNA[1] = _DNA2;
     }
@@ -67,4 +68,6 @@ public:
     void FindPalindrome(string str);
 
     void PrintAllPalindromes(int n);
+
+    vector<Genome> getChromosomes();
 };
