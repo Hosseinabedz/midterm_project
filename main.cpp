@@ -301,6 +301,7 @@ int main()
                               cin >> choice3;
 
                               Animal A;
+                              Animal* newAnimal;
 
                               if (choice3 == 1)
                               {
@@ -325,7 +326,7 @@ int main()
                               }
                               else if (choice3 == 4)
                               {
-                                   A1 + A2;  
+                                  newAnimal = A1 + A2;  
                               }
                               else if (choice3 == 5)
                               {

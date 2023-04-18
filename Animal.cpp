@@ -120,25 +120,27 @@ Animal Animal::AsexualReproduction()
 
     // sakhtane bache ba darsad tashabohe >= 70%:
     int count = ceil((0.7 * n2Chromosomes.size()));
+    int _count = count;
     vector<Genome> childChromosomes;
     // sakht 70% az chromosom ha ke tekrari nabashand
-    while(count > 0)
-    {
-        int index = rand() % n2Chromosomes.size();
-        bool flag = true;
-        for(int i = 0; i < childChromosomes.size(); i++)
+        for(int i = 0; i < _count; i++)
         {
-            if(childChromosomes[i].getDNA1() == n2Chromosomes[index].getDNA1())
+            int index = rand() % n2Chromosomes.size();
+            bool flag = true;
+            for(int i = 0; i < childChromosomes.size(); i++)
             {
-                flag = false;
+                if(childChromosomes[i].getDNA1() == n2Chromosomes[index].getDNA1())
+                {
+                    flag = false;
+                }
             }
+            if(flag == true)
+            {
+                childChromosomes.push_back(n2Chromosomes[index]);
+            }
+
+        
         }
-        if(flag == true)
-        {
-            childChromosomes.push_back(n2Chromosomes[index]);
-            count--;
-        }
-    }
     //sakht baghie chromosom ha
     for(int i = 0; i < n2Chromosomes.size() - count; i++)
     {
@@ -150,7 +152,7 @@ Animal Animal::AsexualReproduction()
     return animal;
 }
 
-Animal Animal::operator+(Animal& A)
+Animal* Animal::operator+(Animal& A)
 {
     AsexualReproduction();
     A.AsexualReproduction();
@@ -159,7 +161,7 @@ Animal Animal::operator+(Animal& A)
     if(chromosomes.size() % 2 == 0 || A.chromosomes.size() % 2 == 0)
     {
         vector<Genome> animalChild;
-        Animal child;
+        Animal *child;
         // darsad tashabohe >= 70%
         while(true)
         {
@@ -177,7 +179,7 @@ Animal Animal::operator+(Animal& A)
                 animalChild.push_back(A.chromosomes[ch2]);
             }
 
-            if(child.SimilarityPercentageOfTwoAnimal(chromosomes, A.chromosomes) >= 70)
+            if(child->SimilarityPercentageOfTwoAnimal(chromosomes, A.chromosomes) >= 70)
             {
                 break;
             }
@@ -188,8 +190,7 @@ Animal Animal::operator+(Animal& A)
         else // n fard bashad
         {
             cout << "Child can't be created!" << endl;
-            Animal notChild;
-            return notChild;
+            return NULL;
             
         }
 
@@ -198,5 +199,48 @@ Animal Animal::operator+(Animal& A)
 
 void Animal::cell_death()
 {
-    cell_death();
+    for(auto & i : chromosomes)
+    {
+        // peivand kharab
+    int x = 0;
+
+    for (int j = 0; j < chromosomes.size(); j++)
+    {
+        for (int i = 0; i < chromosomes[j].getDNA1().size(); i++)
+        {
+            if (chromosomes[j].getDNA1()[i] == 'A' && chromosomes[j].getDNA2()[i] != 'T')
+                x++;
+            else if (chromosomes[j].getDNA1()[i] == 'T' && chromosomes[j].getDNA2()[i] != 'A')
+                x++;
+            else if (chromosomes[j].getDNA1()[i] == 'G' && chromosomes[j].getDNA2()[i] != 'C')
+                x++;
+            else if (chromosomes[j].getDNA1()[i] == 'C' && chromosomes[j].getDNA2()[i] != 'G')
+                x++;
+        }
+    }
+    // peivand AT , CG
+    int AT = 0, CG = 0;
+    for (int i = 0; i < chromosomes.size(); i++)
+    {
+        for (int j = 0; j < chromosomes[i].getDNA1().size(); j++)
+        {
+            if (chromosomes[i].getDNA1()[j] == 'A' && chromosomes[i].getDNA2()[j] == 'T' || chromosomes[i].getDNA1()[j] == 'T' && chromosomes[i].getDNA2()[j] == 'A')
+            {
+                AT++;
+            }
+            if (chromosomes[i].getDNA1()[j] == 'C' && chromosomes[i].getDNA2()[j] == 'G' || chromosomes[i].getDNA1()[j] == 'G' && chromosomes[i].getDNA2()[j] == 'C')
+            {
+                CG++;
+            }
+        }
+    }
+
+    // delete cell
+    if (x > 5 || AT > 3 * CG)
+    {
+        chromosomes.clear();
+        cout << "Cell died out!" << endl; 
+        delete this;
+    }
+    }
 }

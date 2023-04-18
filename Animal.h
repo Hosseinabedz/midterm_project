@@ -25,7 +25,7 @@ class Animal : public Cell
         // tolid mesle gheyr jensi
         Animal AsexualReproduction();
 
-        Animal operator+(Animal& A);
+        Animal* operator+(Animal& A);
         
         void cell_death();
 };
