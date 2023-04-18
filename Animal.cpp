@@ -202,45 +202,47 @@ void Animal::cell_death()
     for(auto & i : chromosomes)
     {
         // peivand kharab
-    int x = 0;
+        int x = 0;
 
-    for (int j = 0; j < chromosomes.size(); j++)
-    {
-        for (int i = 0; i < chromosomes[j].getDNA1().size(); i++)
+        for (int j = 0; j < chromosomes.size(); j++)
         {
-            if (chromosomes[j].getDNA1()[i] == 'A' && chromosomes[j].getDNA2()[i] != 'T')
-                x++;
-            else if (chromosomes[j].getDNA1()[i] == 'T' && chromosomes[j].getDNA2()[i] != 'A')
-                x++;
-            else if (chromosomes[j].getDNA1()[i] == 'G' && chromosomes[j].getDNA2()[i] != 'C')
-                x++;
-            else if (chromosomes[j].getDNA1()[i] == 'C' && chromosomes[j].getDNA2()[i] != 'G')
-                x++;
-        }
-    }
-    // peivand AT , CG
-    int AT = 0, CG = 0;
-    for (int i = 0; i < chromosomes.size(); i++)
-    {
-        for (int j = 0; j < chromosomes[i].getDNA1().size(); j++)
-        {
-            if (chromosomes[i].getDNA1()[j] == 'A' && chromosomes[i].getDNA2()[j] == 'T' || chromosomes[i].getDNA1()[j] == 'T' && chromosomes[i].getDNA2()[j] == 'A')
+            for (int i = 0; i < chromosomes[j].getDNA1().size(); i++)
             {
-                AT++;
-            }
-            if (chromosomes[i].getDNA1()[j] == 'C' && chromosomes[i].getDNA2()[j] == 'G' || chromosomes[i].getDNA1()[j] == 'G' && chromosomes[i].getDNA2()[j] == 'C')
-            {
-                CG++;
+                if (chromosomes[j].getDNA1()[i] == 'A' && chromosomes[j].getDNA2()[i] != 'T')
+                    x++;
+                else if (chromosomes[j].getDNA1()[i] == 'T' && chromosomes[j].getDNA2()[i] != 'A')
+                    x++;
+                else if (chromosomes[j].getDNA1()[i] == 'G' && chromosomes[j].getDNA2()[i] != 'C')
+                    x++;
+                else if (chromosomes[j].getDNA1()[i] == 'C' && chromosomes[j].getDNA2()[i] != 'G')
+                    x++;
             }
         }
-    }
+        // peivand AT , CG
+        int AT = 0, CG = 0;
+        for (int i = 0; i < chromosomes.size(); i++)
+        {
+            for (int j = 0; j < chromosomes[i].getDNA1().size(); j++)
+            {
+                if (chromosomes[i].getDNA1()[j] == 'A' && chromosomes[i].getDNA2()[j] == 'T' || chromosomes[i].getDNA1()[j] == 'T' && chromosomes[i].getDNA2()[j] == 'A')
+                {
+                    AT++;
+                }
+                if (chromosomes[i].getDNA1()[j] == 'C' && chromosomes[i].getDNA2()[j] == 'G' || chromosomes[i].getDNA1()[j] == 'G' && chromosomes[i].getDNA2()[j] == 'C')
+                {
+                    CG++;
+                }
+            }
+        }
 
-    // delete cell
-    if (x > 5 || AT > 3 * CG)
-    {
-        chromosomes.clear();
-        cout << "Cell died out!" << endl; 
-        delete this;
-    }
+        vector<Genome>::iterator it;
+        it = chromosomes.begin();
+
+        // delete cell
+        if (x > 5 || AT > 3 * CG)
+        {  
+            cout << "Cell died out!" << endl; 
+            chromosomes.erase(it);
+        }
     }
 }
